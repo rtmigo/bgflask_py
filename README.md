@@ -42,7 +42,7 @@ $ python3 /my/flask-app/main.py
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-The `RunningFlask` does the same silently, without additional terminal window.
+The `RunningFlask` does the same silently, without terminal window.
 
 ``` python
 with RunningFlask(['python3', '/my/flask-app/main.py']):

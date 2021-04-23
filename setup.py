@@ -36,7 +36,7 @@ setup(
     "Operating System :: POSIX",
   ],
 
-  # test_suite='nose.collector',
-  tests_require=['flask requests'],
+  test_suite='test_unit.suite',
+  tests_require=['flask', 'requests'],
   # zip_safe=False
 )

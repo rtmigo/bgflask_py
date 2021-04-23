@@ -1,1 +1,0 @@
-git+https://github.com/rtmigo/bgprocess_py#egg=bgprocess

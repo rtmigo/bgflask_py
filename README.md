@@ -1,4 +1,4 @@
-Python library for testing Flask applications with HTTP requests.
+Python package running local Flask server process in the background.
 
 Tested on Linux and macOS with Python 3.7-3.9.
 

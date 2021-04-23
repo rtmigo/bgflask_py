@@ -7,22 +7,22 @@ Tested on Linux and macOS with Python 3.7-3.9.
 
 I prefer to test the server like a black box, accessing only the HTTP API it provides.
 
-Also, I want the same code to test my application, whether it is running locally or on the server.
+I could manually start the local Flask server in a terminal window and get a working 
+API at 127.0.0.1:5000. But for the tests I don't want to do anything manually: neither launch a 
+terminal, nor a command in it. This should be done automatically by the testing code.
+
+Also, I want the same testing code to test my application, whether it is running locally or on the server.
 
 ``` python
 test_my_app('http://127.0.0.1:5000')  # test Flask running locally
 test_my_app('http://remote-service-api.com')  # test the same app deployed
 ```
 
-I could manually start the local Flask server in a terminal window and get a working 
-API at 127.0.0.1:5000. But I don't want to do anything manually: neither launch a 
-terminal, nor a command in it. This should be done automatically by the testing code.
 
-# What it does
 
-The library provides the `FlaskBackground` class. 
+# What is RunningFlask
 
-The `FlaskBackground` starts the local Flask server in parallel process.
+The `RunningFlask` object starts the local Flask server in parallel process and keeps it running.
 
 The same effect could be achieved by simply launching standard Flask application in a terminal window:
 
@@ -39,10 +39,10 @@ $ python3 /my/flask-app/main.py
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-The `FlaskBackground` does the same silently, without additional terminal window.
+The `RunningFlask` does the same silently, without additional terminal window.
 
 ``` python
-with FlaskBackground(['python3', '/my/flask-app/main.py']):
+with RunningFlask(['python3', '/my/flask-app/main.py']):
   # Running on http://127.0.0.1:5000/
   # No need for Ctrl+C. Get out of `with` and the server stops
 ```
@@ -78,11 +78,11 @@ Then you can run tests like this:
 
 ``` python3
 import requests
-from bgprocess import FlaskBackground
+from flaskrun import RunningFlask
 
 # the server is not running  
 
-with FlaskBackground(["python3", "/path/to/main.py"]):
+with RunningFlask(["python3", "/path/to/main.py"]):
 
     # we have just started "python3 /path/to/main.py"
         

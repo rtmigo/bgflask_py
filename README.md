@@ -5,7 +5,7 @@ Tested on Linux and macOS with Python 3.7-3.9.
 ---
 # Why
 
-I prefer to test the server like a black box, accessing only the HTTP API it provides.
+I prefer to test my own server like a black box, accessing only the HTTP API it provides.
 
 I could manually start the local Flask server in a terminal window and get a working 
 API at 127.0.0.1:5000. But for the tests I don't want to do anything manually: neither launch a 

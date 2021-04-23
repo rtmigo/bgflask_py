@@ -13,7 +13,7 @@ setup(
   url='https://github.com/rtmigo/flask_bgprocess_py',
 
   packages=find_packages(),
-  install_requires=[],
+  install_requires=['bgprocess @ git+ssh://git@github.com/rtmigo/bgprocess_py#egg=bgprocess', 'pip'],
 
   description="Runs Flask server locally in a background process, so in can be tested with HTTP requests",
 
@@ -38,5 +38,4 @@ setup(
 
   test_suite='test_unit.suite',
   tests_require=['flask', 'requests'],
-  # zip_safe=False
 )

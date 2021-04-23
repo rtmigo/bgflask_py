@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
+import pip
 import unittest
 from pathlib import Path
 
 
 def suite():
-    """Can be imported into `setup.py` as `test_suite="test_unit.suite"`."""
+    """Can be imported into `setup.py` as `test_suite="test_unit.suite"`.
+    But sadly it's deprecated."""
 
     parent_dir = Path(__file__).parent
     init_py, = parent_dir.glob("*/__init__.py")
@@ -26,4 +28,5 @@ def run_tests():
 
 
 if __name__ == "__main__":
+    pip.main(args=['install', 'requests', 'flask'])
     run_tests()

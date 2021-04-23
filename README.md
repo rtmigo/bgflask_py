@@ -50,7 +50,7 @@ with FlaskBackground(['python3', '/my/flask-app/main.py']):
 # How to Install
 
 ``` bash
-$ pip install git+https://github.com/rtmigo/flask_bgprocess_py#egg=flask_bgprocess
+$ pip install git+https://github.com/rtmigo/bgflask_py#egg=bgflask
 ```
 
 # How to Use

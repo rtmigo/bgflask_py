@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 readme = (Path(__file__).parent / 'README.md').read_text()
 
 setup(
-  name="flask_bgprocess",
+  name="flaskrun",
   version="1.0.0",
 
   author="Artёm IG",
@@ -13,7 +13,7 @@ setup(
   url='https://github.com/rtmigo/flask_bgprocess_py',
 
   packages=find_packages(),
-  install_requires=['bgprocess @ git+https://github.com/rtmigo/bgprocess_py#egg=bgprocess', 'pip'],
+  install_requires=['bgprocess @ git+https://github.com/rtmigo/bgprocess_py#egg=bgprocess', 'pip', 'neatest'],
 
   description="Runs Flask server locally in a background process, so in can be tested with HTTP requests",
 
@@ -36,6 +36,6 @@ setup(
     "Operating System :: POSIX",
   ],
 
-  test_suite='test_unit.suite',
+  test_suite='test_unit.neatest.suite',
   tests_require=['flask', 'requests'],
 )

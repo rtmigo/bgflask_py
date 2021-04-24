@@ -2,7 +2,7 @@ import os
 import unittest
 from pathlib import Path
 import requests
-from flask_bgprocess import FlaskBackground
+from flaskrun import FlaskBackground
 
 command = [str(Path(__file__).parent / 'server.py')]
 

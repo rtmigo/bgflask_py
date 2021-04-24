@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 readme = (Path(__file__).parent / 'README.md').read_text()
 
 setup(
-  name="flask_bgprocess",
+  name="flaskrun",
   version="1.0.0",
 
   author="Artёm IG",

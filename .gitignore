@@ -32,6 +32,7 @@ eggs/
 lib64/
 parts/
 sdist/
+.tox
 var/
 wheels/
 *.egg-info/

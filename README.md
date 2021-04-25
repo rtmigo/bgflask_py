@@ -104,3 +104,11 @@ with FlaskRunner(["python3", "/path/to/main.py"]):
     
 # the server is not running again     
 ```
+
+You can also pass `None` instead of the `"python3"`. In this case the current 
+`sys.executable` to launch the script.
+
+``` python3 
+with FlaskRunner([None, "/path/to/main.py"]):
+    pass
+```

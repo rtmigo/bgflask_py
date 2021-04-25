@@ -4,10 +4,26 @@ from pathlib import Path
 import requests
 from flaskrun import FlaskRunner
 
-command = [str(Path(__file__).parent / 'server.py')]
+server_file_py = Path(__file__).parent / 'server.py'
+command = [str(server_file_py)]
 
 
 class TestFlaskBg(unittest.TestCase):
+
+    def assert_not_running(self):
+        with self.assertRaises(requests.exceptions.ConnectionError):
+            requests.get('http://127.0.0.1:5000/say-hi')
+
+    def assert_running(self):
+        self.assertEqual(requests.get('http://127.0.0.1:5000/say-hi').text,
+                         'privet')
+
+    def test_first_arg_python3(self):
+        self.assert_not_running()
+        with FlaskRunner(['python3', str(server_file_py)]):
+            self.assert_running()
+        self.assert_not_running()
+
     def test_start_stop(self):
         # test the server is not running (yet)
         with self.assertRaises(requests.exceptions.ConnectionError):

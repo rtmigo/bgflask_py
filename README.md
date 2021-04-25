@@ -50,8 +50,10 @@ The `FlaskRunner` does the same silently, without terminal window.
 
 ``` python
 with FlaskRunner(['python3', '/my/flask-app/main.py']):
-  # Running on http://127.0.0.1:5000/
+  # the server was started and initialized.
+  # It is now running on http://127.0.0.1:5000/
   # No need for Ctrl+C. Get out of `with` and the server stops
+  pass
 ```
 
 # How to Install

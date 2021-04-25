@@ -6,16 +6,18 @@ readme = (Path(__file__).parent / 'README.md').read_text()
 
 setup(
   name="flaskrun",
-  version="1.0.0",
+  version="1.0.1",
 
   author="Artёm IG",
   author_email="ortemeo@gmail.com",
   url='https://github.com/rtmigo/flaskrun_py#flaskrun',
 
   packages=find_packages(),
+  install_requires=["bgprocess"],
   #install_requires=['bgprocess @ git+https://github.com/rtmigo/bgprocess_py#egg=bgprocess', 'pip', 'neatest'],
 
-  description="Runs Flask server locally in a background process, so in can be tested with HTTP requests",
+  description="Runs Flask server locally in a background process, so in can be "
+              "tested with HTTP requests",
 
   long_description=readme,
   long_description_content_type='text/markdown',

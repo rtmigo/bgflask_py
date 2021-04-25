@@ -10,7 +10,7 @@ setup(
 
   author="Artёm IG",
   author_email="ortemeo@gmail.com",
-  url='https://github.com/rtmigo/flask_bgprocess_py',
+  url='https://github.com/rtmigo/flaskrun_py#flaskrun',
 
   packages=find_packages(),
   #install_requires=['bgprocess @ git+https://github.com/rtmigo/bgprocess_py#egg=bgprocess', 'pip', 'neatest'],

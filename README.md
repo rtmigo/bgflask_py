@@ -14,18 +14,18 @@ and remote servers the same way.
 
 ``` python
 test_my_api('http://127.0.0.1:5000')
-test_my_api('http://deployed-on-remote-server.com')
+test_my_api('http://deployed-on-remote-server.net')
 ```
 
-I also don't want to import the server module into the testing code. It's a
-black box, so it should run in a separate process. So how do I run the testing
-server locally?
+I also want to start and restart the local testing server easily. So I'll be
+sure, that no variables are cached between requests: not only the `Flask` object
+reset, but the whole Python process with the API was restarted.
 
 I could *manually* start the local Flask server in a terminal window and get a
 working API at 127.0.0.1:5000. But I want this to be done *automatically*, since
 the tests are automated.
 
-# What is FlaskRunner
+# FlaskRunner
 
 The `FlaskRunner` object starts the local Flask server in parallel process and
 keeps it running.

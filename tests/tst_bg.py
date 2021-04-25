@@ -24,6 +24,12 @@ class TestFlaskBg(unittest.TestCase):
             self.assert_running()
         self.assert_not_running()
 
+    def test_first_arg_none(self):
+        self.assert_not_running()
+        with FlaskRunner([None, str(server_file_py)]):
+            self.assert_running()
+        self.assert_not_running()
+
     def test_start_stop(self):
         # test the server is not running (yet)
         with self.assertRaises(requests.exceptions.ConnectionError):

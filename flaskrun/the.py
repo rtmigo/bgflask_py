@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
 # SPDX-License-Identifier: MIT
 import sys
-import unittest
 from typing import Optional, Dict, List
 
 from bgprocess import BackgroundProcess
@@ -16,12 +15,11 @@ class FlaskRunner:
         self.server: Optional[BackgroundProcess] = None
 
     def __enter__(self):
-
         cmd = self.command.copy()
         if cmd and cmd[0] is None:
-            cmd[0] = sys.executable  # todo unit test
+            cmd[0] = sys.executable
 
-        self.server = BackgroundProcess(self.command, buffer_output=True,
+        self.server = BackgroundProcess(cmd, buffer_output=True,
                                         add_env=self.add_env)
         self.server.start()
 

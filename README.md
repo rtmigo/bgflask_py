@@ -17,9 +17,8 @@ test_my_api('http://127.0.0.1:5000')
 test_my_api('http://deployed-on-remote-server.net')
 ```
 
-I also want to start and restart the local testing server easily. So I'll be
-sure, that no variables are cached between requests: not only the `Flask` object
-reset, but the whole Python process with the API was restarted.
+I also want to easily restart the local server process. This way, I can be sure 
+that after a restart, Python's global variables have their default values.
 
 I could *manually* start the local Flask server in a terminal window and get a
 working API at 127.0.0.1:5000. But I want this to be done *automatically*, since
@@ -105,7 +104,7 @@ with FlaskRunner(["python3", "/path/to/main.py"]):
 # the server is not running again     
 ```
 
-You can also pass `None` instead of the `"python3"`. In this case the current 
+You can also pass `None` instead of the `"python3"`. In this case the current
 `sys.executable` to launch the script.
 
 ``` python3 

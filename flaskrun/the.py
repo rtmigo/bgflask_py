@@ -7,7 +7,7 @@ from typing import Optional, Dict, List
 from bgprocess import BackgroundProcess
 
 
-class FlaskBackground:
+class FlaskRunner:
     def __init__(self, command: List[str], add_env: Dict[str, str] = None, start_timeout: float = 5.0):
         self.add_env = add_env
         self.command = command

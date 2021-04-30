@@ -132,8 +132,3 @@ can set the first item of `command` to `None`.
 with FlaskRunner([None, "/path_to/flask_app/main.py"]):
     pass
 ```
-
-
-
-
-

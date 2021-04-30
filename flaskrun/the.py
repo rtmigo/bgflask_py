@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
 # SPDX-License-Identifier: MIT
+
 import pathlib
 import sys
 import os
@@ -57,11 +58,7 @@ class FlaskRunner:
         the_add_env['PYTHONPATH'] = pythonpath
 
         self.server = BackgroundProcess(cmd, buffer_output=True,
-                                        add_env=the_add_env,
-
-                                        # add_env={"PYTHONPATH": os.path.abspath('.')+":"+(os.environ.get("PYTHONPATH") or '')},
-                                        # cwd=os.path.abspath('.')
-                                        )
+                                        add_env=the_add_env)
         self.server.start()
 
         the_line = self.server.next_line(

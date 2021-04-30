@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
-# unit tests will run this file as an external process to check the terminal output and the HTTP responses
+# SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
+# SPDX-License-Identifier: MIT
+
+# unit tests will run this file as an external process to check the terminal
+# output and the HTTP responses
 import os
 import sys
 
-#print("PYTHONPATH", os.environ.get("PYTHONPATH"))
-print("CURRENT", sys.path)
-#print("ENVIRON", os.environ)
-
+# the following import will fail without correct PYTHONPATH
 from tests.import_me import FROM_IMPORT_ME
 
 from flask import Flask

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
+# SPDX-License-Identifier: MIT
+
+
 import os
 import unittest
 from pathlib import Path
@@ -57,8 +61,9 @@ class TestFlaskBg(unittest.TestCase):
             self.assertEqual(requests.get('http://127.0.0.1:5000/get-x').text,
                              '42')
 
-        # we did not change the environment: the variable was passed to particular Flask instance,
-        # so if we start again, the variable is not defined
+        # we did not change the environment: the variable was passed to
+        # particular Flask instance, so if we start again, the variable is
+        # not defined
         with FlaskRunner(command):
             self.assertEqual(requests.get('http://127.0.0.1:5000/get-x').text,
                              '')

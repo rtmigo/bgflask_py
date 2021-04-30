@@ -3,6 +3,7 @@
 
 
 import os
+import sys
 import unittest
 from pathlib import Path
 import requests
@@ -22,15 +23,21 @@ class TestFlaskBg(unittest.TestCase):
         self.assertEqual(requests.get('http://127.0.0.1:5000/say-hi').text,
                          'privet')
 
-    def test_first_arg_python3(self):
+    def test_command_interpreter_exe(self):
         self.assert_not_running()
-        with FlaskRunner(['python3', str(server_file_py)]):
+        # we do not need to specify `command=`
+        with FlaskRunner([sys.executable, str(server_file_py)]):
             self.assert_running()
         self.assert_not_running()
 
-    def test_first_arg_none(self):
+    def test_command_interpeter_none(self):
         self.assert_not_running()
         with FlaskRunner([None, str(server_file_py)]):
+            self.assert_running()
+        self.assert_not_running()
+
+    def test_module(self):
+        with FlaskRunner(module="tests.server"):
             self.assert_running()
         self.assert_not_running()
 
@@ -40,7 +47,7 @@ class TestFlaskBg(unittest.TestCase):
             requests.get('http://127.0.0.1:5000/say-hi')
 
         # run server and get two different responses
-        with FlaskRunner(command):
+        with FlaskRunner(command=command):
             self.assertEqual(requests.get('http://127.0.0.1:5000/say-hi').text,
                              'privet')
             self.assertEqual(requests.get('http://127.0.0.1:5000/say-bye').text,

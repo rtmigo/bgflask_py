@@ -2,9 +2,10 @@
 
 # unit tests will run this file as an external process to check the terminal output and the HTTP responses
 import os
+import sys
 
-print("PYTHONPATH", os.environ.get("PYTHONPATH"))
-print("CURRENT", os.getcwd())
+#print("PYTHONPATH", os.environ.get("PYTHONPATH"))
+print("CURRENT", sys.path)
 #print("ENVIRON", os.environ)
 
 from tests.import_me import FROM_IMPORT_ME

@@ -48,7 +48,7 @@ $ python3 /my/flask-app/main.py
 The `FlaskRunner` does the same silently, without terminal window.
 
 ``` python
-with FlaskRunner(['python3', '/my/flask-app/main.py']):
+with FlaskRunner(command=['python3', '/path/flask_app/main.py']):
   # the server was started and initialized.
   # It is now running on http://127.0.0.1:5000/
   # No need for Ctrl+C. Get out of `with` and the server stops
@@ -90,9 +90,9 @@ from flaskrun import FlaskRunner
 
 # the server is not running  
 
-with FlaskRunner(["python3", "/path/to/main.py"]):
+with FlaskRunner(["python3", "/path_to/flask_app/main.py"]):
 
-    # we have just started "python3 /path/to/main.py"
+    # we have just started main.py
         
     # So the server is running, and you can send requests 
     # directly to localhost. By default the Flask server listens  
@@ -104,10 +104,36 @@ with FlaskRunner(["python3", "/path/to/main.py"]):
 # the server is not running again     
 ```
 
-You can also pass `None` instead of the `"python3"`. In this case the current
-`sys.executable` to launch the script.
+## Creating FlaskRunner
+
+### With module name
 
 ``` python3 
-with FlaskRunner([None, "/path/to/main.py"]):
+with FlaskRunner(module="main"):
     pass
 ```
+
+``` python3 
+with FlaskRunner(module="flask_app.main"):
+    pass
+```
+
+### With command line
+
+``` python3 
+with FlaskRunner(["python3", "/path_to/flask_app/main.py"]):
+    pass
+```
+
+To run command with the current interpreter (`sys.executable`), you
+can set the first item of `command` to `None`.
+
+``` python3 
+with FlaskRunner([None, "/path_to/flask_app/main.py"]):
+    pass
+```
+
+
+
+
+

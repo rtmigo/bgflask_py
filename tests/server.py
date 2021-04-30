@@ -3,7 +3,7 @@
 # unit tests will run this file as an external process to check the terminal output and the HTTP responses
 import os
 
-print("CWD", os.getcwd())
+print("ENVIRON", os.environ)
 
 from tests.import_me import FROM_IMPORT_ME
 

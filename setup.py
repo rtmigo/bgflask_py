@@ -6,7 +6,7 @@ readme = (Path(__file__).parent / 'README.md').read_text()
 
 setup(
   name="flaskrun",
-  version="1.0.1",
+  version="1.0.2",
 
   author="Artёm IG",
   author_email="ortemeo@gmail.com",

@@ -3,6 +3,8 @@
 # unit tests will run this file as an external process to check the terminal output and the HTTP responses
 import os
 
+from tests.import_me import FROM_IMPORT_ME
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -16,6 +18,11 @@ def hi():
 @app.route('/say-bye')
 def bye():
     return 'poka'
+
+
+@app.route('/imported1')
+def imported1():
+    return FROM_IMPORT_ME
 
 
 @app.route('/get-x')

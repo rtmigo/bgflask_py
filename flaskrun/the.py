@@ -19,9 +19,13 @@ class FlaskRunner:
         if cmd and cmd[0] is None:
             cmd[0] = sys.executable
 
+
+
         self.server = BackgroundProcess(cmd, buffer_output=True,
                                         add_env=self.add_env,
-                                        cwd=os.path.abspath('.'))
+                                        #add_env={"PYTHONPATH": os.path.abspath('.')+":"+os.environ.get("PYTHONPATH")},
+                                        #cwd=os.path.abspath('.')
+                                        )
         self.server.start()
 
         the_line = self.server.next_line(

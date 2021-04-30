@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
 # SPDX-License-Identifier: MIT
-import sys
+import sys, os
 from typing import Optional, Dict, List
 
 from bgprocess import BackgroundProcess
@@ -20,7 +20,8 @@ class FlaskRunner:
             cmd[0] = sys.executable
 
         self.server = BackgroundProcess(cmd, buffer_output=True,
-                                        add_env=self.add_env)
+                                        add_env=self.add_env,
+                                        cwd=os.path.abspath('.'))
         self.server.start()
 
         the_line = self.server.next_line(

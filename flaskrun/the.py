@@ -22,8 +22,8 @@ class FlaskRunner:
 
 
         self.server = BackgroundProcess(cmd, buffer_output=True,
-                                        add_env=self.add_env,
-                                        #add_env={"PYTHONPATH": os.path.abspath('.')+":"+os.environ.get("PYTHONPATH")},
+                                        #add_env=self.add_env,
+                                        add_env={"PYTHONPATH": os.path.abspath('.')+":"+os.environ.get("PYTHONPATH")},
                                         #cwd=os.path.abspath('.')
                                         )
         self.server.start()

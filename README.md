@@ -132,3 +132,15 @@ can set the first item of `command` to `None`.
 with FlaskRunner([None, "/path_to/flask_app/main.py"]):
     pass
 ```
+
+## Temporary disabling FlaskRunner
+
+When `$FLASKRUN` environment variable is set to `0`, the server will not be started.
+The code runs as usual, but `FlaskRunner` does nothing.
+
+``` bash
+FLASKRUN=0 python3 run_my_unittest.py
+```
+
+This is useful when you're running Flask server manually, for example, when 
+debugging.

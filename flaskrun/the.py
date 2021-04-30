@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
 # SPDX-License-Identifier: MIT
-
+import os
+import warnings
 import pathlib
 import sys
 from pathlib import Path
@@ -28,6 +29,17 @@ def path_char():
         return ';'
     else:
         return ':'
+
+
+def env_enabled():
+    flaskrun_str = os.getenv('FLASKRUN') or '1'
+    try:
+        v = int(flaskrun_str)
+    except ValueError:
+        v = 1
+        warnings.warn(f'Failed to parse $FLASKRUN "{flaskrun_str}"')
+
+    return v != 0
 
 
 class FlaskRunner:
@@ -72,6 +84,9 @@ class FlaskRunner:
 
     def __enter__(self):
 
+        if not env_enabled():
+            return
+
         if self.command:
             cmd = self.command.copy()
             if cmd and cmd[0] is None:
@@ -94,4 +109,6 @@ class FlaskRunner:
                 "Failed to start the server." + "\n".join(self.server.buffer))
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.server.terminate()
+        if self.server is not None:
+            self.server.terminate()
+            self.server = None

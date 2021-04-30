@@ -5,6 +5,7 @@
 import os
 import sys
 import unittest
+import warnings
 from pathlib import Path
 import requests
 from flaskrun import FlaskRunner
@@ -74,6 +75,33 @@ class TestFlaskBg(unittest.TestCase):
         with FlaskRunner(command):
             self.assertEqual(requests.get('http://127.0.0.1:5000/get-x').text,
                              '')
+
+    def test_env_flaskrun_default(self):
+        del os.environ['FLASKRUN']
+        self.assert_not_running()
+        with FlaskRunner(command):
+            self.assert_running()
+
+    def test_env_flaskrun_1(self):
+        os.environ['FLASKRUN'] = '1'
+        self.assert_not_running()
+        with FlaskRunner(command):
+            self.assert_running()
+
+    def test_env_flaskrun_0(self):
+        os.environ['FLASKRUN'] = ' 0 '  # intentional spaces
+        self.assert_not_running()
+        with FlaskRunner(command):
+            self.assert_not_running()
+
+    def test_env_flaskrun_labuda(self):
+        os.environ['FLASKRUN'] = 'labuda'
+        self.assert_not_running()
+
+        with self.assertWarns(Warning):
+            with FlaskRunner(command):
+                self.assert_running()
+
 
 
 if __name__ == "__main__":

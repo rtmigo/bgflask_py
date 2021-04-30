@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
 # SPDX-License-Identifier: MIT
+
 import os
 import warnings
 import pathlib
@@ -17,7 +18,7 @@ def get_by_case_insensitive_key(d: Dict[str, str], key: str) -> Optional[str]:
     if len(values) >= 2:
         raise ValueError("More than one item found by the case-insensitive key")
     if values:
-        return next(values)
+        return next(iter(values))
     else:
         return None
 
@@ -43,7 +44,9 @@ def env_enabled():
 
 
 class FlaskRunner:
-    def __init__(self, command: List[str] = None, module: str = None,
+    def __init__(self,
+                 command: List[str] = None,
+                 module: str = None,
                  add_env: Dict[str, str] = None,
                  start_timeout: float = 5.0,
                  copy_pythonpath: bool = True):

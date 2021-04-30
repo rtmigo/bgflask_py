@@ -20,9 +20,18 @@ class FlaskRunner:
             cmd[0] = sys.executable
 
 
+        # https://docs.python.org/3/library/sys.html#sys.path
+
+
+
+        the_add_env = self.add_env or dict()
+        if "PYTHONPATH" not in the_add_env:  # todo case insensitive
+            the_add_env['PYTHONPATH'] = ':'.join(sys.path)
+
 
         self.server = BackgroundProcess(cmd, buffer_output=True,
-                                        add_env=self.add_env,
+                                        add_env=the_add_env,
+
                                         #add_env={"PYTHONPATH": os.path.abspath('.')+":"+(os.environ.get("PYTHONPATH") or '')},
                                         #cwd=os.path.abspath('.')
                                         )

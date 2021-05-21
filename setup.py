@@ -39,15 +39,16 @@ setup(
     install_requires=["bgprocess"],
     python_requires=">=3.7",
 
-    description="Runs Werkzeug server locally in a background process, so in can "
-                "be tested with HTTP requests",
+    description="Runs Werkzeug server locally in a background process, "
+                "so in can be tested with HTTP requests",
 
     long_description=readme,
     long_description_content_type='text/markdown',
 
     license='MIT',
 
-    keywords="""werkzeug flask unit testing test  unit-test wsgi process timeout""".split(),
+    keywords="""werkzeug flask unit testing test 
+                unit-test wsgi process timeout""".split(),
 
     # https://pypi.org/classifiers/
     classifiers=[

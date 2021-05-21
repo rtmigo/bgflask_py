@@ -52,7 +52,7 @@ jobs:
       run: mypy
     - name: Run pkg tests
       run: |
-        python ./test_pkg
+        python ./test_pkg.py
 
 
   to-staging:

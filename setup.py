@@ -2,11 +2,31 @@ from pathlib import Path
 
 from setuptools import setup, find_packages
 
+def load_constants(pattern='*/_constants.py') -> Dict[str, Any]:
+    """Finds in the parent dir a single file by the pattern and imports module
+    from it. Returns the dictionary of globals defined in the module."""
+    import importlib.util as ilu
+
+    # finding the _constants.py (or anything defined by the pattern)
+    candidates = list(Path(__file__).parent.glob(pattern))
+    assert len(candidates) == 1, f"Candidates: {candidates}"
+    filename = candidates[0]
+
+    # importing module from `filename`
+    spec = ilu.spec_from_file_location('', filename)
+    module = ilu.module_from_spec(spec)
+    # noinspection Mypy
+    spec.loader.exec_module(module)
+    return module.__dict__
+
+
+constants = load_constants()
+
 readme = (Path(__file__).parent / 'README.md').read_text()
 
 setup(
     name="runwerk",
-    version="1.2.0",
+    version=constants['__version__'],
 
     author="Artёm IG",
     author_email="ortemeo@gmail.com",

@@ -33,14 +33,17 @@ def path_char():
 
 
 def env_enabled():
-    flaskrun_str = os.getenv('FLASKRUN') or '1'
-    try:
-        v = int(flaskrun_str)
-    except ValueError:
-        v = 1
-        warnings.warn(f'Failed to parse $FLASKRUN "{flaskrun_str}"')
+    if os.getenv('FLASKRUN') is not None:
+        warnings.warn('Use FLASKRUNNER environment var instead of FLASKRUN')
 
-    return v != 0
+    for var in ['FLASKRUN', 'FLASKRUNNER']:
+        value = os.getenv(var) or '1'
+        value = value.strip().lower()
+        if value == '0' or value == "false":
+            return False
+        if value != '1' and value != 'true':
+            warnings.warn(f'Unexpected {var} value: "{value}"')
+    return True
 
 
 class FlaskRunner:
@@ -50,9 +53,23 @@ class FlaskRunner:
                  add_env: Dict[str, str] = None,
                  start_timeout: float = 5.0,
                  copy_pythonpath: bool = True):
+        """
 
-        if not command and not module:
-            raise ValueError("Please specify either `module` or `command`")
+        :param command: The command to run the server. For example,
+        ['python3', 'my_server.py']. If the first item it None, it will be
+        replaced with the current Python executable: [None, 'my_server.py'].
+
+        :param module: A shorter alternative to [command] in case the command
+        is just [python3 -m pkg.module].
+
+        :param add_env:
+        :param start_timeout:
+        :param copy_pythonpath:
+        """
+
+        if (command is None) == (module is None):
+            raise ValueError("Please specify either `module` or `command`, "
+                             "but not both.")
 
         self.add_env = dict() if add_env is None else add_env.copy()
         self.command = command
@@ -85,22 +102,27 @@ class FlaskRunner:
             pythonpath = path_char().join(sys.path)
         self.add_env['PYTHONPATH'] = pythonpath
 
+    def _gen_args(self) -> List[str]:
+
+        if self.command is not None:
+            cmd = self.command.copy()
+            if cmd and cmd[0] is None:
+                cmd[0] = sys.executable
+            return cmd
+        else:
+            assert self.module is not None
+            return [sys.executable, "-m", self.module]
+
     def __enter__(self):
 
         if not env_enabled():
             return
 
-        if self.command:
-            cmd = self.command.copy()
-            if cmd and cmd[0] is None:
-                cmd[0] = sys.executable
-        else:
-            cmd = [sys.executable, "-m", self.module]
-
         if self.copy_pythonpath:
             self._pythonpath_to_add_env()
 
-        self.server = BackgroundProcess(cmd, buffer_output=True,
+        self.server = BackgroundProcess(self._gen_args(),
+                                        buffer_output=True,
                                         add_env=self.add_env)
         self.server.start()
 

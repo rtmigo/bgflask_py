@@ -40,7 +40,7 @@ The same effect could be achieved by launching standard Flask application in a
 terminal:
 
 ``` bash
-$ python3 /my/flask-app/main.py
+$ python3 /my/flask_app/main.py
 ```
 
 ``` text
@@ -55,7 +55,7 @@ $ python3 /my/flask-app/main.py
 The `RunWerk` does the same silently, without terminal window.
 
 ``` python
-with RunWerk(command=['python3', '/path/flask_app/main.py']):
+with RunWerk(command=['python3', '/my/flask_app/main.py']):
   # the server was started and initialized.
   # It is now running on http://127.0.0.1:5000/
   # No need for Ctrl+C. Get out of `with` and the server stops

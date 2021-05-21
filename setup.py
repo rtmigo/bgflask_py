@@ -1,6 +1,8 @@
 from pathlib import Path
+from typing import Dict, Any
 
-from setuptools import setup, find_packages
+from setuptools import setup
+
 
 def load_constants(pattern='*/_constants.py') -> Dict[str, Any]:
     """Finds in the parent dir a single file by the pattern and imports module
@@ -23,16 +25,17 @@ def load_constants(pattern='*/_constants.py') -> Dict[str, Any]:
 constants = load_constants()
 
 readme = (Path(__file__).parent / 'README.md').read_text()
+name="runwerk"
 
 setup(
-    name="runwerk",
+    name=name,
     version=constants['__version__'],
 
     author="Artёm IG",
     author_email="ortemeo@gmail.com",
     url='https://github.com/rtmigo/runwerk_py#readme',
 
-    packages=find_packages(),
+    packages=[name],
     install_requires=["bgprocess"],
     python_requires=">=3.7",
 

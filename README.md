@@ -29,9 +29,9 @@ I also want to easily restart the local server process. This way, I can be sure
 that after a restart, the global variables inside the server have their default
 values.
 
-I could *manually* start the local Flask+Werkzeug server in a terminal window
-and get a working API at 127.0.0.1:5000. But I want this to be done *
-automatically*, since the tests are automated.
+I could _manually_ start the local Flask+Werkzeug server in a terminal window
+and get a working API at 127.0.0.1:5000. But I want this to be done 
+_automatically_, since the tests are automated.
 
 The `RunWerk` object starts the local server in parallel process and keeps it
 running.

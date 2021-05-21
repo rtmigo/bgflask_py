@@ -77,37 +77,37 @@ class TestFlaskBg(unittest.TestCase):
                              '')
 
     def test_env_flaskrun_default(self):
-        del os.environ['FLASKRUNNER']
+        del os.environ['RUNWERK_ENABLED']
         self.assert_not_running()
         with RunWerk(command):
             self.assert_running()
 
     def test_env_flaskrun_1(self):
-        os.environ['FLASKRUNNER'] = '1'
+        os.environ['RUNWERK_ENABLED'] = '1'
         self.assert_not_running()
         with RunWerk(command):
             self.assert_running()
 
     def test_env_flaskrun_true(self):
-        os.environ['FLASKRUNNER'] = 'true'
+        os.environ['RUNWERK_ENABLED'] = 'true'
         self.assert_not_running()
         with RunWerk(command):
             self.assert_running()
 
     def test_env_flaskrun_0(self):
-        os.environ['FLASKRUNNER'] = ' 0 '  # intentional spaces
+        os.environ['RUNWERK_ENABLED'] = ' 0 '  # intentional spaces
         self.assert_not_running()
         with RunWerk(command):
             self.assert_not_running()
 
     def test_env_flaskrun_false(self):
-        os.environ['FLASKRUNNER'] = 'fAlSe'
+        os.environ['RUNWERK_ENABLED'] = 'fAlSe'
         self.assert_not_running()
         with RunWerk(command):
             self.assert_not_running()
 
     def test_env_flaskrun_labuda(self):
-        os.environ['FLASKRUNNER'] = 'labuda'
+        os.environ['RUNWERK_ENABLED'] = 'labuda'
         self.assert_not_running()
 
         with self.assertWarns(Warning):

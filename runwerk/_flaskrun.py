@@ -34,9 +34,10 @@ def path_char():
 
 def env_enabled():
     if os.getenv('FLASKRUN') is not None:
-        warnings.warn('Use FLASKRUNNER environment var instead of FLASKRUN')
+        # outdated since 2021-05
+        warnings.warn('Use RUNWERK_ENABLED environment var instead of FLASKRUN')
 
-    for var in ['FLASKRUN', 'FLASKRUNNER']:
+    for var in ['FLASKRUN', 'RUNWERK_ENABLED']:
         value = os.getenv(var) or '1'
         value = value.strip().lower()
         if value == '0' or value == "false":
@@ -46,7 +47,7 @@ def env_enabled():
     return True
 
 
-class FlaskRunner:
+class RunWerk:
     def __init__(self,
                  command: List[str] = None,
                  module: str = None,

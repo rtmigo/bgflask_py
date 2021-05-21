@@ -50,6 +50,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Lint with mypy
       run: mypy
+    - name: Run pkg tests
+      run: |
+        python ./test_pkg.py
 
 
   to-staging:

@@ -135,12 +135,14 @@ with FlaskRunner([None, "/path_to/flask_app/main.py"]):
 
 ## Temporary disabling FlaskRunner
 
-When `$FLASKRUN` environment variable is set to `0`, the server will not be started.
-The code runs as usual, but `FlaskRunner` does nothing.
+When `$FLASKRUNNER` environment variable is set to `False`, the server will not be started.
+The code runs as usual, but `FlaskRunner` object does nothing.
 
 ``` bash
-FLASKRUN=0 python3 run_my_unittest.py
+FLASKRUNNER=False python3 run_my_unittest.py
 ```
+
+
 
 This is useful when you're running Flask server manually, for example, when 
 debugging.

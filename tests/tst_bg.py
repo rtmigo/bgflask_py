@@ -77,25 +77,37 @@ class TestFlaskBg(unittest.TestCase):
                              '')
 
     def test_env_flaskrun_default(self):
-        del os.environ['FLASKRUN']
+        del os.environ['FLASKRUNNER']
         self.assert_not_running()
         with FlaskRunner(command):
             self.assert_running()
 
     def test_env_flaskrun_1(self):
-        os.environ['FLASKRUN'] = '1'
+        os.environ['FLASKRUNNER'] = '1'
+        self.assert_not_running()
+        with FlaskRunner(command):
+            self.assert_running()
+
+    def test_env_flaskrun_true(self):
+        os.environ['FLASKRUNNER'] = 'true'
         self.assert_not_running()
         with FlaskRunner(command):
             self.assert_running()
 
     def test_env_flaskrun_0(self):
-        os.environ['FLASKRUN'] = ' 0 '  # intentional spaces
+        os.environ['FLASKRUNNER'] = ' 0 '  # intentional spaces
+        self.assert_not_running()
+        with FlaskRunner(command):
+            self.assert_not_running()
+
+    def test_env_flaskrun_false(self):
+        os.environ['FLASKRUNNER'] = 'fAlSe'
         self.assert_not_running()
         with FlaskRunner(command):
             self.assert_not_running()
 
     def test_env_flaskrun_labuda(self):
-        os.environ['FLASKRUN'] = 'labuda'
+        os.environ['FLASKRUNNER'] = 'labuda'
         self.assert_not_running()
 
         with self.assertWarns(Warning):
